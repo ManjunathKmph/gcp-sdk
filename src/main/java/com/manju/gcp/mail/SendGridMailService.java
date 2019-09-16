@@ -144,6 +144,6 @@ public class SendGridMailService {
             System.out.println("Error in reading and converting file ->" + filePath.toString());
             io.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 }
