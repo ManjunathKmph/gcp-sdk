@@ -54,8 +54,8 @@ public class SendGridMailService {
      * @param body -- Content of the body mail.
      * @param attachment -- Holds the type to file along with content to be attached in the mail. Use method convertPathToAttachment(filepath, attchmentType) method to get attachment object.
      */
-    public void sendMailWithAttachment(List<String> toEmailsList, List<String> ccEmailsList, List<String> bccEmailsList, String subject, String body, Attachments attachment) {
-        sendMail(toEmailsList, ccEmailsList, bccEmailsList, HTML_TYPE, subject, body, Optional.of(attachment));
+    public void sendMailWithAttachment(List<String> toEmailsList, List<String> ccEmailsList, List<String> bccEmailsList, String subject, String body, Optional<Attachments> attachment) {
+        sendMail(toEmailsList, ccEmailsList, bccEmailsList, HTML_TYPE, subject, body, attachment);
     }
     
     /**
@@ -127,10 +127,10 @@ public class SendGridMailService {
      * @param attachmentFileType -- Type of the file to be converted. ex: application/pdf, application/json etc.,
      * @return -- Returns the send grid specific attachment object which holds the file content, file name and its type.
      */
-    public Attachments convertPathToAttachment(Path filePath, String attachmentFileType) {
+    public Optional<Attachments> convertPathToAttachment(Path filePath, String attachmentFileType) {
         try {
             if(!filePath.toFile().exists()) {
-                return null;
+                return Optional.empty();
             }
             Attachments attachment = new Attachments();
             byte[] attachmentContentBytes = Files.readAllBytes(filePath);
@@ -139,7 +139,7 @@ public class SendGridMailService {
             attachment.setType(attachmentFileType);
             attachment.setFilename(filePath.getFileName().toString());
             attachment.setDisposition("attachment");
-            return attachment;
+            return Optional.of(attachment);
         } catch (IOException io) {
             System.out.println("Error in reading and converting file ->" + filePath.toString());
             io.printStackTrace();
