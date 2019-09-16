@@ -35,23 +35,27 @@ public class SendGridMailService {
      * Method to send mail with out an attachment.
      *
      * @param toEmailsList -- List of to email addresses.
+     * @param ccEmailsList -- List of cc email addresses.
+     * @param bccEmailsList -- List of bcc email addresses.
      * @param subject -- Subject of the mail.
      * @param body -- Content of the body mail.
      */
-    public void sendMailWithoutAttachment(List<String> toEmailsList,String subject, String body) {
-        sendMail(toEmailsList, Collections.emptyList(), Collections.emptyList(), HTML_TYPE, subject, body, Optional.empty());
+    public void sendMailWithoutAttachment(List<String> toEmailsList, List<String> ccEmailsList, List<String> bccEmailsList, String subject, String body) {
+        sendMail(toEmailsList, ccEmailsList, bccEmailsList, HTML_TYPE, subject, body, Optional.empty());
     }
     
     /**
      * Method to send mail with an attachment.
      *
      * @param toEmailsList -- List of to email addresses.
+     * @param ccEmailsList -- List of cc email addresses.
+     * @param bccEmailsList -- List of bcc email addresses.
      * @param subject -- Subject of the mail.
      * @param body -- Content of the body mail.
      * @param attachment -- Holds the type to file along with content to be attached in the mail. Use method convertPathToAttachment(filepath, attchmentType) method to get attachment object.
      */
-    public void sendMailWithAttachment(List<String> toEmailsList, String subject, String body, Attachments attachment) {
-        sendMail(toEmailsList, Collections.emptyList(), Collections.emptyList(), HTML_TYPE, subject, body, Optional.of(attachment));
+    public void sendMailWithAttachment(List<String> toEmailsList, List<String> ccEmailsList, List<String> bccEmailsList, String subject, String body, Attachments attachment) {
+        sendMail(toEmailsList, ccEmailsList, bccEmailsList, HTML_TYPE, subject, body, Optional.of(attachment));
     }
     
     /**
