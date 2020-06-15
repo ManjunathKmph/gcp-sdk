@@ -24,8 +24,13 @@
         <dependency>
         	<groupId>com.google.cloud</groupId>
         	<artifactId>google-cloud-pubsub</artifactId>
-        	<version>1.90.0</version>
+        	<version>1.107.0</version>
         </dependency>
+        <dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-bigtable</artifactId>
+			<version>1.13.0</version>
+		</dependency>
     </dependencies>
     <build>
         <finalName>gcp-sdk-examples</finalName>
